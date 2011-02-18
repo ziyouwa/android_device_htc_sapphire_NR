@@ -12,18 +12,58 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#
-# AndroidBoard.mk is a legacy mechanism to deal with a few
-# edge-cases that can't be managed otherwise. No new rules
-# should be added to this file.
-#
-
 LOCAL_PATH := $(call my-dir)
 
-# Least specific includes go first, so that they can get
-# overridden further down
+file := $(TARGET_OUT_KEYLAYOUT)/sapphire-keypad.kl
+ALL_PREBUILT += $(file)
+$(file) : $(LOCAL_PATH)/sapphire-keypad.kl | $(ACP)
+	$(transform-prebuilt-to-target)
+
+file := $(TARGET_ROOT_OUT)/init.trout.rc
+ALL_PREBUILT += $(file)
+$(file) : $(LOCAL_PATH)/init.trout.rc | $(ACP)
+	$(transform-prebuilt-to-target)
+
+file := $(TARGET_ROOT_OUT)/init.sapphire.rc
+ALL_PREBUILT += $(file)
+$(file) : $(LOCAL_PATH)/init.sapphire.rc | $(ACP)
+	$(transform-prebuilt-to-target)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE_TAGS := debug optional
+LOCAL_SRC_FILES := sapphire-keypad.kcm
+include $(BUILD_KEY_CHAR_MAP)
+
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel/2708-zImage
+BUILD_TARGET_EXTRA_OTABOOT_INSTALL_SCRIPT := \
+    $(LOCAL_PATH)/kernel/edifyinstall.py
+endif
+
+file := $(INSTALLED_KERNEL_TARGET)
+ALL_PREBUILT += $(file)
+$(file): $(TARGET_PREBUILT_KERNEL) | $(ACP)
+	$(transform-prebuilt-to-target)
+
+$(call add-radio-file,recovery/images/firmware_error.565)
+$(call add-radio-file,recovery/images/bitmap_size.txt)
+
+file := $(TARGET_OUT_KEYLAYOUT)/h2w_headset.kl
+ALL_PREBUILT += $(file)
+$(file) : $(LOCAL_PATH)/h2w_headset.kl | $(ACP)
+	$(transform-prebuilt-to-target)
+
+file := $(TARGET_ROOT_OUT)/sbin/sysinit.rc
+ALL_PREBUILT += $(file)
+$(file) : $(LOCAL_PATH)/prebuilt/sbin/sysinit.rc | $(ACP)
+	$(transform-prebuilt-to-target)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE := vold.fstab
+LOCAL_MODULE_TAGS := debug optional
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+include $(BUILD_PREBUILT)
 
 # include the non-open-source counterpart to this file
 -include vendor/htc/dream_sapphire/AndroidBoardVendor.mk
