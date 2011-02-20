@@ -37,8 +37,7 @@ PRODUCT_PACKAGES += \
 	gps.trout \
 	gps.sapphire \
 	copybit.msm7k \
-	gralloc.msm7k \
-	lights.msm7k
+	gralloc.msm7k
 
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
@@ -59,13 +58,18 @@ PRODUCT_COPY_FILES += \
     device/htc/dream_sapphire/prebuilt/ueventd.sapphire.rc:root/ueventd.sapphire.rc \
     device/htc/dream_sapphire/prebuilt/vold.fstab:system/etc/vold.fstab
 
-# Keylayout / Headset
+# Keychars / Keylayout / Headset
 PRODUCT_COPY_FILES += \
+    device/htc/dream_sapphire/keylayout/trout-keypad.kcm:system/usr/keychars/trout-keypad.kcm \
+    device/htc/dream_sapphire/keylayout/trout-keypad-qwertz.kcm:system/usr/keychars/trout-keypad-qwertz.kcm \
+    device/htc/dream_sapphire/keylayout/trout-keypad-v2.kcm:system/usr/keychars/trout-keypad-v2.kcm \
+    device/htc/dream_sapphire/keylayout/trout-keypad-v3.kcm:system/usr/keychars/trout-keypad-v2.kcm \
     device/htc/dream_sapphire/keylayout/trout-keypad.kl:system/usr/keylayout/trout-keypad.kl \
     device/htc/dream_sapphire/keylayout/trout-keypad-qwertz.kl:system/usr/keylayout/trout-keypad-qwertz.kl \
     device/htc/dream_sapphire/keylayout/trout-keypad-v2.kl:system/usr/keylayout/trout-keypad-v2.kl \
-    device/htc/dream_sapphire/keylayout/trout-keypad-v3.kl:system/usr/keylayout/trout-keypad-v3.kl \
-    device/htc/dream_sapphire/keylayout/sapphire-keypad.kl:system/usr/keylayout/sapphire-keypad.kl \
+    device/htc/dream_sapphire/keylayout/trout-keypad-v3.kl:system/usr/keylayout/trout-keypad-v2.kl \
+    device/htc/dream_sapphire/keylayout/sapphire-keypad.kcm:system/usr/keychars/trout-keypad.kcm \
+    device/htc/dream_sapphire/keylayout/sapphire-keypad.kl:system/usr/keylayout/trout-keypad.kl \
     device/htc/dream_sapphire/keylayout/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl
 
 PRODUCT_PROPERTY_OVERRIDES := \
