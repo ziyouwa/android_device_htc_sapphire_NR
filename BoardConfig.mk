@@ -45,6 +45,9 @@ WIFI_FIRMWARE_LOADER        := "wlan_loader"
 BOARD_KERNEL_BASE := 0x01920000
 BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null
 
+#libsurfaceflinger to avoid Draw Texture Extenstion
+BOARD_AVOID_DRAW_TEXTURE_EXTENSION := true
+
 BOARD_HAVE_BLUETOOTH := true
 
 BOARD_VENDOR_USE_AKMD := akm8976
@@ -61,11 +64,15 @@ BOARD_USES_QCOM_LIBS := true
 
 BOARD_USE_FROYO_LIBCAMERA := true
 
+BOARD_NO_RGBX_8888 := true
+
 BOARD_USES_GPSSHIM:=true
 
 BOARD_GPS_LIBRARIES := libgps
 
 BOARD_USE_KINETO_COMPATIBILITY := true
+
+TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/common
 
